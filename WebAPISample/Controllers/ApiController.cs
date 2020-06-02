@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAPISample.Data;
 using WebAPISample.Models;
 
 namespace WebAPISample.Controllers
 {
-    public class ApiController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ApiController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
@@ -19,130 +21,85 @@ namespace WebAPISample.Controllers
             _context = context;
         }
 
-        // GET: API
-        public async Task<IActionResult> Index()
+        // GET: api/Api
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
-            return View(await _context.Movies.ToListAsync());
+            return await _context.Movies.ToListAsync();
         }
 
-        // GET: API/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: api/Api/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Movie>> GetMovie(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var movie = await _context.Movies
-                .FirstOrDefaultAsync(m => m.MovieId == id);
-            if (movie == null)
-            {
-                return NotFound();
-            }
-
-            return View(movie);
-        }
-
-        // GET: API/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: API/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieId,Title,Director,Genre")] Movie movie)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(movie);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(movie);
-        }
-
-        // GET: API/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var movie = await _context.Movies.FindAsync(id);
+
             if (movie == null)
             {
                 return NotFound();
             }
-            return View(movie);
+
+            return movie;
         }
 
-        // POST: API/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MovieId,Title,Director,Genre")] Movie movie)
+        // PUT: api/Api/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
             if (id != movie.MovieId)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            _context.Entry(movie).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(movie);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MovieExists(movie.MovieId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
             }
-            return View(movie);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MovieExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: API/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: api/Api
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            _context.Movies.Add(movie);
+            await _context.SaveChangesAsync();
 
-            var movie = await _context.Movies
-                .FirstOrDefaultAsync(m => m.MovieId == id);
+            return CreatedAtAction("GetMovie", new { id = movie.MovieId }, movie);
+        }
+
+        // DELETE: api/Api/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Movie>> DeleteMovie(int id)
+        {
+            var movie = await _context.Movies.FindAsync(id);
             if (movie == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
-        }
-
-        // POST: API/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var movie = await _context.Movies.FindAsync(id);
             _context.Movies.Remove(movie);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return movie;
         }
 
         private bool MovieExists(int id)
