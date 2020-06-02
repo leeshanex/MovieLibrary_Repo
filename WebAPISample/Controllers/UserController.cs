@@ -12,23 +12,23 @@ namespace WebAPISample.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public ApiController(ApplicationContext context)
+        public UserController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: api/Api
+        // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
             return await _context.Movies.ToListAsync();
         }
 
-        // GET: api/Api/5
+        // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Movie>> GetMovie(int id)
         {
@@ -42,7 +42,7 @@ namespace WebAPISample.Controllers
             return movie;
         }
 
-        // PUT: api/Api/5
+        // PUT: api/User/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
@@ -74,7 +74,7 @@ namespace WebAPISample.Controllers
             return NoContent();
         }
 
-        // POST: api/Api
+        // POST: api/User
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
@@ -86,7 +86,7 @@ namespace WebAPISample.Controllers
             return CreatedAtAction("GetMovie", new { id = movie.MovieId }, movie);
         }
 
-        // DELETE: api/Api/5
+        // DELETE: api/User/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Movie>> DeleteMovie(int id)
         {
