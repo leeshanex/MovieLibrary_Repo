@@ -23,7 +23,7 @@ namespace WebAPISample.Controllers
         public IActionResult Get()
         {
             // Retrieve all movies from db logic
-            var movie = _context.Movies;
+            var movie = _context.Movies.ToList();
             return Ok(movie);
         }
 
@@ -34,7 +34,7 @@ namespace WebAPISample.Controllers
             // Retrieve movie by id from db logic
             // return Ok(movie);
             var movie = _context.Movies.Where(m => m.MovieId == id).Single();
-            return Ok(movie);
+            return Ok(id);
         }
 
         // POST api/movie

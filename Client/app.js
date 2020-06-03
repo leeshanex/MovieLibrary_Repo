@@ -26,9 +26,9 @@
     $('#my-form').submit( processForm );
 })(jQuery);
 
-  function getAllMovies(){
-    $("#displayMovieDiv").html(" ");
-    $.ajax({
+  	function getAllMovies(){
+    	$("#displayMovieDiv").html(" ");
+    	$.ajax({
         url: "https://localhost:44325/api/movie",
         contentType: "application/json",
         type: 'get',
