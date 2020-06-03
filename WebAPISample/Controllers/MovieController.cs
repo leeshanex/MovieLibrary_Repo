@@ -24,7 +24,7 @@ namespace WebAPISample.Controllers
         {
             // Retrieve all movies from db logic
             var movie = _context.Movies;
-            return Ok(new string[] { "movie1 string", "movie2 string" });
+            return Ok(movie);
         }
 
         // GET api/movie/5
@@ -56,7 +56,7 @@ namespace WebAPISample.Controllers
             updatedMovie.Title = movie.Title;
             updatedMovie.Director = movie.Director;
             updatedMovie.Genre = movie.Genre;
-            updatedMovie.ImageUrl = movie.ImageUrl;
+            //updatedMovie.ImageUrl = movie.ImageUrl;
             return Ok(movie);
         }
 
