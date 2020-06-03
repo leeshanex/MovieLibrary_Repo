@@ -34,13 +34,17 @@
         success: function (data, textStatus, jQxhr){
             console.log("Success!");
             console.log(data);
-            $("#displayMovieDiv").append('<p>TitleL${data[i]["title"]} Director:${data[i]["director"]}</p>')
+            for (let i = 0; i<data.length; i++){
+                $("#displayMovieDiv").append(
+                '<p>Title: ${data[i]["title"]} Director: ${data[i]["director"]}</p>')
+            };
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log("Error!");
             console.log(errorThrown);
         },
     });
+
 
     function UpdateMovies(){
     	$.ajax({
