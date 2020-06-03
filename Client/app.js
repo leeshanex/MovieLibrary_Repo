@@ -26,15 +26,18 @@
     $('#my-form').submit( processForm );
 })(jQuery);
 
-  function getAllMovies(){
+  function getAllMovies( e ){
+ 
     $.ajax({
         url: "https://localhost:44325/api/movie",
+        dataType: 'json'
         contentType: "application/json",
         type: 'get',
+       
         success: function (data, textStatus, jQxhr){
             console.log("Success!");
             console.log(data);
-            $("#displayMovieDiv").append('<p>TitleL${data[i]["title"]} Director:${data[i]["director"]}</p>')
+            $("#displayMovieDiv").append('<p>Title:${data[i]["title"]} Director:${data[i]["director"]}</p>')
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log("Error!");
@@ -42,9 +45,10 @@
         },
     });
 
-    function UpdateMovies(){
+    function UpdateMovies( e ){
     	$.ajax({
     		url: "https://localhost:44325/api/movie",
+    		dataType: 'json',
     		contentType: "application/json",
     		type: 'put',
     		success: function (data, textStatus, jQxhr){
