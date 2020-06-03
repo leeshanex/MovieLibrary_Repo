@@ -23,7 +23,7 @@ namespace WebAPISample.Controllers
         public IActionResult Get()
         {
             // Retrieve all movies from db logic
-            var movie = _context.Movies.ToList();
+            var movie = _context.Movies;
             return Ok(movie);
         }
 
