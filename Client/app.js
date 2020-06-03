@@ -36,7 +36,7 @@
             console.log(data);
             for (let i = 0; i<data.length; i++){
                 $("#displayMovieDiv").append(
-                '<p>Title: ${data[i]["title"]} Director: ${data[i]["director"]}</p>')
+                `<p>Title: ${data[i]["title"]} Director: ${data[i]["director"]}</p>`)
             };
         },
         error: function (jqXhr, textStatus, errorThrown) {
