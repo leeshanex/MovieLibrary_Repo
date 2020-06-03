@@ -27,6 +27,7 @@
 })(jQuery);
 
   function getAllMovies(){
+    $("#displayMovieDiv").html(" ");
     $.ajax({
         url: "https://localhost:44325/api/movie",
         contentType: "application/json",
@@ -36,7 +37,7 @@
             console.log(data);
             for (let i = 0; i<data.length; i++){
                 $("#displayMovieDiv").append(
-                '<p>Title: ${data[i]["title"]} Director: ${data[i]["director"]}</p>')
+                `<p>Title: ${data[i]["title"]} Director: ${data[i]["director"]}</p>`)
             };
         },
         error: function (jqXhr, textStatus, errorThrown) {
