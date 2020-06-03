@@ -37,7 +37,7 @@
             console.log(data);
             for (let i = 0; i<data.length; i++){
                 $("#displayMovieDiv").append(
-                `<p>Title: ${data[i]["title"]} Director: ${data[i]["director"]}</p>`)
+                `<p>${data[i]["title"]} Director: ${data[i]["director"]}</p>`)
             };
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -47,7 +47,7 @@
     });
 
 
-    function UpdateMovies(){
+    function updateMovies(){
     	$.ajax({
     		url: "https://localhost:44325/api/movie",
     		contentType: "application/json",
@@ -55,7 +55,6 @@
     		success: function (data, textStatus, jQxhr){
     			console.log("Success!");
     			console.log(data);
-    			$("#displayMovieDiv").append('<p>${}</p>')
     		},
     		error: function (jqXhr, textStatus, errorThrown) {
     			console.log("Error!");
@@ -63,4 +62,20 @@
     		},
     	})
     }
+  }
+
+  function addMovies() {
+  	$.ajax({
+  		url: "https://localhost:44325/api/movie",
+  		contentType: "application/json".
+  		type: 'post',
+  		success: function (data,textStatus,jQxhr){
+  			console.log("Success!");
+  			console.log(data);
+  		},
+  		error: function (jqXhr, textStatus, errorThrownr){
+  			console.log("Error!");
+  			console.log(errorThrown);
+  		},
+  	})
   }
