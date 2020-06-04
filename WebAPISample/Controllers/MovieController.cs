@@ -53,9 +53,9 @@ namespace WebAPISample.Controllers
         {
             // Update movie in db logic
             var updatedMovie = _context.Movies.Find(movie);
-            updatedMovie.Title = movie.Title;
-            updatedMovie.Director = movie.Director;
-            updatedMovie.Genre = movie.Genre;
+            updatedMovie.Title = movie.Title ?? updatedMovie.Title;
+            updatedMovie.Director = movie.Director ?? updatedMovie.Director;
+            updatedMovie.Genre = movie.Genre ?? updatedMovie.Genre;
             //updatedMovie.ImageUrl = movie.ImageUrl;
             return Ok(movie);
         }
