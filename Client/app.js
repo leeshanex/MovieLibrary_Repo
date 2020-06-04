@@ -53,8 +53,10 @@
 function updateMovies(){
 	$.ajax({
 		url: "https://localhost:44325/api/movie",
+		dataType: 'json',
 		contentType: "application/json",
 		type: 'put',
+		data: JSON.stringify(),
 		 success: function (data, textStatus, jQxhr){
             console.log("Success!");
             console.log(data);
@@ -66,17 +68,17 @@ function updateMovies(){
 
 	})
 
-//add a new movie
+// add a new movie
   function addMovies() {
-  	$().post("https://localhost:44325/api/movie", data, function(result){
-  		$().html(result);
-		  	},json)
   }
   	$.ajax({
   		url: "https://localhost:44325/api/movie",
+  		dataType: 'json',
   		contentType: "application/json",
   		type: 'post',
+  		data: JSON.append(dict),
   		success: function (data,textStatus,jQxhr){
+  			$('#response pre').html(data);
   			console.log("Success!");
   			console.log(data);
   		},

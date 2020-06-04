@@ -51,6 +51,10 @@ namespace WebAPISample.Controllers
         [HttpPut]
         public IActionResult Put([FromBody] Movie movie)
         {
+            //if (!ModelState.IsValid)
+            //    return BadRequest("not a valid model");
+            //var existingMovies = _context.Movies
+
             // Update movie in db logic
             var updatedMovie = _context.Movies.Find(movie);
             updatedMovie.Title = movie.Title;
