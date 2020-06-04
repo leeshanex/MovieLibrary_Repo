@@ -28,7 +28,7 @@
 
 //display/see details
   	function getAllMovies(){
-    	$("#displayMovieTable").html(" ");
+    	$("#displayMovieDiv").html(" ");
     	$.ajax({
         url: "https://localhost:44325/api/movie",
         contentType: "application/json",
@@ -37,7 +37,7 @@
             console.log("Success!");
             console.log(data);
             for (let i = 0; i<data.length; i++){
-                $("#displayMovieTable").append(
+                $("#displayMovieDiv").append(
                 `<p>Title: ${data[i]["title"]}
                 Director: ${data[i]["director"]}
                 Genre: ${data[i]["genre"]} </p>`)
@@ -74,10 +74,13 @@
 
     		req.done(function(data){
     			$('#titleInput').text(data["title"]);
+    			$('#directorInput').text(data["director"]);
+    			$('#genreInput').text(data["genre"]);
+    			 $('#updateSection').submit( updateMovies );
     		})
     	})
     })
-};
+}
 //     	$.ajax({
 //     		url: "https://localhost:44325/api/movie",
 //     		contentType: "application/json",
