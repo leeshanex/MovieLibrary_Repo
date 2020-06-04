@@ -51,7 +51,7 @@
 
 //update details
     $(document).ready(function updateMovies(){
-    	$('.updateButton').on('click', function(){
+    	$("#updateButton").on('click', function(){
     		//var title = $(this).attr('title');
     		var title = $('#titleInput').val();
     		var director = $('#directorInput').val();
@@ -61,7 +61,16 @@
     			url : "https://localhost:44325/api/movie",
     			type : 'put',
     			data : {title : title, director : director, genre : genre},
-    		});
+    		success: function (data, textStatus, jQxhr){
+            console.log("Success!");
+            console.log(data);
+        
+    },
+              error: function (jqXhr, textStatus, errorThrown) {
+            console.log("Error!");
+            console.log(errorThrown);
+        },
+    });
 
     		req.done(function(data){
     			$('#titleInput').text(data["title"]);
