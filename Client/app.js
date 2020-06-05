@@ -60,6 +60,7 @@ function updateMovies(){
 		 success: function (data, textStatus, jQxhr){
             console.log("Success!");
             console.log(data);
+
     },
        error: function (jqXhr, textStatus, errorThrown) {
             console.log("Error!");
@@ -69,8 +70,8 @@ function updateMovies(){
 	})
 
 // add a new movie
-  function addMovies() {
-  }
+  function addMovies(){ 
+
   	$.ajax({
   		url: "https://localhost:44325/api/movie",
   		dataType: 'json',
@@ -81,12 +82,14 @@ function updateMovies(){
   			$('#response pre').html(data);
   			console.log("Success!");
   			console.log(data);
+  			
   		},
   		error: function (jqXhr, textStatus, errorThrownr){
   			console.log("Error!");
   			console.log(errorThrown);
   		},
   	})
+  }
   }
 }
 
