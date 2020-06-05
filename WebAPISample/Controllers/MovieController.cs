@@ -51,13 +51,33 @@ namespace WebAPISample.Controllers
         [HttpPut]
         public IActionResult Put([FromBody] Movie movie)
         {
-            // Update movie in db logic
-            var updatedMovie = _context.Movies.Find(movie);
-            updatedMovie.Title = movie.Title ?? updatedMovie.Title;
-            updatedMovie.Director = movie.Director ?? updatedMovie.Director;
-            updatedMovie.Genre = movie.Genre ?? updatedMovie.Genre;
-            //updatedMovie.ImageUrl = movie.ImageUrl;
-            return Ok(movie);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("not a valid model");
+            }
+
+            var existingMovie = _context.Movies.Where(m => m.MovieId == movie.MovieId).FirstOrDefault();
+            if(existingMovie != null)
+            {
+                existingMovie.Title = movie.Title;
+                existingMovie.Director = movie.Director;
+                existingMovie.Genre = movie.Genre;
+                _context.SaveChanges();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            //// Update movie in db logic
+            //var updatedMovie = _context.Movies.Find(movie);
+            //updatedMovie.Title = movie.Title;
+            //updatedMovie.Director = movie.Director;
+            //updatedMovie.Genre = movie.Genre;
+            ////updatedMovie.ImageUrl = movie.ImageUrl;
+            return Ok();
+
         }
 
         // DELETE api/movie/5

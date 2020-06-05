@@ -26,8 +26,9 @@
     $('#my-form').submit( processForm );
 })(jQuery);
 
+//display/see details
   	function getAllMovies(){
-    	$("#displayMovieDiv").html(" ");
+    	$("#displayMovieTable").html(" ");
     	$.ajax({
         url: "https://localhost:44325/api/movie",
         contentType: "application/json",
@@ -36,8 +37,10 @@
             console.log("Success!");
             console.log(data);
             for (let i = 0; i<data.length; i++){
-                $("#displayMovieDiv").append(
-                `<p>${data[i]["title"]} Director: ${data[i]["director"]}</p>`)
+                $("#displayMovieTable").append(
+                `<tr><td>Title: ${data[i]["title"]}
+                Director: ${data[i]["director"]}
+                Genre: ${data[i]["genre"]} </td></tr>`)
             };
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -46,30 +49,36 @@
         },
     });
 
+//update details
+function updateMovies(){
+	$.ajax({
+		url: "https://localhost:44325/api/movie",
+		dataType: 'json',
+		contentType: "application/json",
+		type: 'put',
+		data: JSON.stringify(),
+		 success: function (data, textStatus, jQxhr){
+            console.log("Success!");
+            console.log(data);
+    },
+       error: function (jqXhr, textStatus, errorThrown) {
+            console.log("Error!");
+            console.log(errorThrown);
+        },
 
-    function updateMovies(){
-    	$.ajax({
-    		url: "https://localhost:44325/api/movie",
-    		contentType: "application/json",
-    		type: 'put',
-    		success: function (data, textStatus, jQxhr){
-    			console.log("Success!");
-    			console.log(data);
-    		},
-    		error: function (jqXhr, textStatus, errorThrown) {
-    			console.log("Error!");
-    			console.log(errorThrown);
-    		},
-    	})
-    }
-  }
+	})
 
+// add a new movie
   function addMovies() {
+  }
   	$.ajax({
   		url: "https://localhost:44325/api/movie",
-  		contentType: "application/json".
+  		dataType: 'json',
+  		contentType: "application/json",
   		type: 'post',
+  		data: JSON.append(dict),
   		success: function (data,textStatus,jQxhr){
+  			$('#response pre').html(data);
   			console.log("Success!");
   			console.log(data);
   		},
@@ -79,3 +88,5 @@
   		},
   	})
   }
+}
+
