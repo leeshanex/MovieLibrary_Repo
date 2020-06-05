@@ -7,24 +7,64 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100;1,300;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/14130b3e66.js" crossorigin="anonymous"></script>
-
 </head>
-
 <body>
-</body>
+    <div id="NavBarWrap" class="row">
+        <div class="col-md-6">
+            <span class="title">Shane & Kevin's Movie Library</span>
+        </div>
+        <div class="col-md-6 ">
+            <form id="search-form">
+                <label>Search Film By:</label>
+                <select id="search-type-list">
+                    <option value="Title">Title</option>
+                    <option value="Director">DirectorName</option>
+                    <option value="Genre">Genre</option>
+                </select>
+                <input id="search-input-text" type="text" name="search-input-text" placeholder="Search" />
+                <button type="submit">Search</button>
+            </form>
+            <form id="my-form2">
+                <button id="ALL" type="submit">Show All Movies</button>
+            </form>
+        </div>
+    </div>
+    <div id="bodyContainer">
+        <div id="tableWrapper">
+                <table id="results">
+                    <tr>
+                        <td class="tableHead">Title</td>
+                        <td class="tableHead">Director</td>
+                        <td class="tableHead">Genre</td>
+                    </tr>
+                </table>
+        </div>
+        <div id="displayImage">
+            <img id="currentMovieImage">
+        </div>
+    </div>
+    <button id="showCreate" type="button">Add to Movie Library</button>
+    <div id="formsSticky">
 
+        <div id="createPop" style="display: none;">
+            <h2>Add A Film</h2>
+            <form id="my-form">
+                <input id="formOneInput1" type="text" name="title" placeholder="Title" />
+                <input id="formOneInput2" type="text" name="director" placeholder="Director" />
+                <input id="formOneInput3" type="text" name="genre" placeholder="Genre" />
 
-<!-- Ready to use Font Awesome. Activate interlock. Dynotherms - connected. Infracells - up. Icons are go! -->
+                <button type="submit">Create</button>
+            </form>
+        </div>
+        <div id="updatePop" style="display: none;">
+            <h2>Update Library Records</h2> 
+            <form id="update-form">
+                <input type="hidden" id="id-input" name="MovieId">
+                <input id="title-input" type="text" name="title" placeholder="Title" />
+                <input id="director-input" type="text" name="director" placeholder="Director" />
+                <input id="genre-input" type="text" name="genre" placeholder="Genre" />
 
-
-<form id="my-form">
-    <input type="text" name="title" placeholder="Title" />
-    <input type="text" name="director" placeholder="Director" />
-    <input type="text" name="genre" placeholder="Genre" />
-
- <button type="submit">Submit</button>
-</form>
-
+<<<<<<< HEAD
 <button type = "button" onclick="getAllMovies()">Get All Movies</button>
 
 <!-- <div id="displayMovieDiv"></div> -->
@@ -44,5 +84,15 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="app.js"></script>
+=======
+                <button name="action" value="update" type="submit">Update</button>
+                <button name="action" id="deleteBtn" value="delete" type="button">Remove</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+>>>>>>> fac9134684a1bcbbc9cc38be1d2d41fe63b7f897
 </body>
+
 </html>

@@ -61,7 +61,11 @@ namespace WebAPISample.Controllers
         [HttpPut]
         public IActionResult Put(int id, [FromBody] Movie movie)
         {
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> fac9134684a1bcbbc9cc38be1d2d41fe63b7f897
             if (!ModelState.IsValid)
             {
                 return BadRequest("not a valid model");
@@ -89,7 +93,12 @@ namespace WebAPISample.Controllers
             //updatedMovie.Title = movie.Title;
             //updatedMovie.Director = movie.Director;
             //updatedMovie.Genre = movie.Genre;
+<<<<<<< HEAD
             //updatedMovie.ImageUrl = movie.ImageUrl;
+=======
+            ////updatedMovie.ImageUrl = movie.ImageUrl;
+            return Ok();
+>>>>>>> fac9134684a1bcbbc9cc38be1d2d41fe63b7f897
 
         }
 
