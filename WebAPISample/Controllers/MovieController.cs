@@ -34,18 +34,28 @@ namespace WebAPISample.Controllers
             // Retrieve movie by id from db logic
             // return Ok(movie);
             var movie = _context.Movies.Where(m => m.MovieId == id).Single();
-            return Ok(id);
+            return Ok();
         }
 
         // POST api/movie
         [HttpPost]
         public IActionResult Post([FromBody]Movie value)
         {
-            // Create movie in db logic
-            var movie = _context.Movies.Add(value);
-            _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("invalid data");
+            }
+
+            var createMovie = _context.Movies.Add(value);
+                
+                _context.SaveChanges();
+            
             return Ok();
         }
+    
+            // Create movie in db logic
+            //var movie = _context.Movies.Add(value);
+            //_context.SaveChangesAsync();
 
         // PUT api/movie
         [HttpPut]
@@ -96,6 +106,10 @@ namespace WebAPISample.Controllers
             //_context.movies.remove(movie);
             //_context.savechanges();
             return Ok(movie);
+        }
+
+        public interface IHttpActionResult
+        {
         }
     }
 }
