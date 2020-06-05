@@ -31,7 +31,7 @@
     	$("#displayMovieTable").html(" ");
     	$.ajax({
         url: "https://localhost:44325/api/movie",
-        contentType: "application/json",
+        contentType: 'application/json',
         type: 'get',
         success: function (data, textStatus, jQxhr){
             console.log("Success!");
@@ -54,9 +54,9 @@ function updateMovies(){
 	$.ajax({
 		url: "https://localhost:44325/api/movie",
 		dataType: 'json',
-		contentType: "application/json",
+		contentType: 'application/json',
 		type: 'put',
-		data: JSON.stringify(),
+		data: JSON.replaceWith(dict),
 		 success: function (data, textStatus, jQxhr){
             console.log("Success!");
             console.log(data);
@@ -74,7 +74,7 @@ function updateMovies(){
   	$.ajax({
   		url: "https://localhost:44325/api/movie",
   		dataType: 'json',
-  		contentType: "application/json",
+  		contentType: 'application/json',
   		type: 'post',
   		data: JSON.append(dict),
   		success: function (data,textStatus,jQxhr){

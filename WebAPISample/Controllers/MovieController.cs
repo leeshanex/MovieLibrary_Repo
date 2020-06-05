@@ -59,33 +59,38 @@ namespace WebAPISample.Controllers
 
         // PUT api/movie
         [HttpPut]
-        public IActionResult Put([FromBody] Movie movie)
+        public IActionResult Put(int id, [FromBody] Movie movie)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest("not a valid model");
             }
-
-            var existingMovie = _context.Movies.Where(m => m.MovieId == movie.MovieId).FirstOrDefault();
-            if(existingMovie != null)
+            for ( id = 0; id >= movie.MovieId; id++)
             {
-                existingMovie.Title = movie.Title;
-                existingMovie.Director = movie.Director;
-                existingMovie.Genre = movie.Genre;
-                _context.SaveChanges();
-            }
-            else
-            {
-                return NotFound();
-            }
+                var existingMovie = _context.Movies.Where(m => m.MovieId == id).FirstOrDefault();
+                if (existingMovie != null)
+                {
+                    existingMovie.Title = movie.Title;
+                    existingMovie.Director = movie.Director;
+                    existingMovie.Genre = movie.Genre;
 
+                    _context.SaveChanges();
+                }
+                //else
+                //{
+                //    return NotFound();
+                //}
+               
+            }
+            return Ok();
             //// Update movie in db logic
             //var updatedMovie = _context.Movies.Find(movie);
             //updatedMovie.Title = movie.Title;
             //updatedMovie.Director = movie.Director;
             //updatedMovie.Genre = movie.Genre;
-            ////updatedMovie.ImageUrl = movie.ImageUrl;
-            return Ok();
+            //updatedMovie.ImageUrl = movie.ImageUrl;
+
         }
 
         // DELETE api/movie/5
@@ -106,8 +111,6 @@ namespace WebAPISample.Controllers
             return Ok(movie);
         }
 
-        public interface IHttpActionResult
-        {
-        }
+       
     }
 }
